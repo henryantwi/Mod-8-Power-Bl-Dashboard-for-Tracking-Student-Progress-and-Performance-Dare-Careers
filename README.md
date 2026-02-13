@@ -75,6 +75,3 @@ We adopted a **Professional Corporate Theme** to ensure readability and executiv
 1.  **Filter First:** Use the top Slicers (Track/Cohort) to narrow down the view.
 2.  **Identify Trends:** On Page 1, look for Tracks with high Dropout rates or low Assessment scores.
 3.  **Drill Down:** Switch to Page 2 and use the **Learner List** to find specific students contributing to those trends (e.g., students with <80% Attendance).
-
----
-*Developed by Henry Nana Antwi*
