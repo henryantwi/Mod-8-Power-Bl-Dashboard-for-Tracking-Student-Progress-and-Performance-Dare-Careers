@@ -69,50 +69,50 @@ The project utilizes a **Constellation Schema** where multiple Fact tables share
 
 ```mermaid
 erDiagram
-    %% Dimensions
-    LEARNER {
+    %% ── DIMENSION TABLES ──────────────────────────────────────────
+    LEARNER["LEARNER [DIMENSION]"] {
         string Email PK
         string FullName
         string Track
         string Cohort
     }
-    DATE {
+    DATE["DATE [DIMENSION]"] {
         date Date PK
         int Month
         int Week
     }
-    STATUS {
+    STATUS["STATUS [DIMENSION]"] {
         string Email PK
         string GraduationStatus
         string CertificationStatus
     }
 
-    %% Fact Tables
-    ATTENDANCE {
+    %% ── FACT TABLES ───────────────────────────────────────────────
+    ATTENDANCE["ATTENDANCE [FACT]"] {
         string Email FK
         date Date FK
         int DurationMinutes
         int WasPresent
     }
-    PARTICIPATION {
+    PARTICIPATION["PARTICIPATION [FACT]"] {
         string Email FK
         date Date FK
         int ParticipationScore
     }
-    ASSESSMENTS {
+    ASSESSMENTS["ASSESSMENTS [FACT]"] {
         string Email FK
         string AssessmentType
         int Score
     }
 
-    %% Relationships
+    %% ── RELATIONSHIPS ─────────────────────────────────────────────
     LEARNER ||--o{ ATTENDANCE : "has"
     LEARNER ||--o{ PARTICIPATION : "has"
     LEARNER ||--o{ ASSESSMENTS : "takes"
-    
+
     DATE ||--o{ ATTENDANCE : "on"
     DATE ||--o{ PARTICIPATION : "on"
-    
+
     STATUS ||--|| LEARNER : "describes"
 ```
 
