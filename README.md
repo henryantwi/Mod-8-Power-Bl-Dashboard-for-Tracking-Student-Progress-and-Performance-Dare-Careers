@@ -63,6 +63,61 @@ During development, we encountered and solved several key technical challenges:
 
 ---
 
+## 📈 Data Model (Constellation Schema)
+
+The project utilizes a **Constellation Schema** where multiple Fact tables share common Dimensions.
+
+```mermaid
+erDiagram
+    %% Dimensions
+    LEARNER {
+        string Email PK
+        string FullName
+        string Track
+        string Cohort
+    }
+    DATE {
+        date Date PK
+        int Month
+        int Week
+    }
+    STATUS {
+        string Email PK
+        string GraduationStatus
+        string CertificationStatus
+    }
+
+    %% Fact Tables
+    ATTENDANCE {
+        string Email FK
+        date Date FK
+        int DurationMinutes
+        int WasPresent
+    }
+    PARTICIPATION {
+        string Email FK
+        date Date FK
+        int ParticipationScore
+    }
+    ASSESSMENTS {
+        string Email FK
+        string AssessmentType
+        int Score
+    }
+
+    %% Relationships
+    LEARNER ||--o{ ATTENDANCE : "has"
+    LEARNER ||--o{ PARTICIPATION : "has"
+    LEARNER ||--o{ ASSESSMENTS : "takes"
+    
+    DATE ||--o{ ATTENDANCE : "on"
+    DATE ||--o{ PARTICIPATION : "on"
+    
+    STATUS ||--|| LEARNER : "describes"
+```
+
+---
+
 ## Information Design (UI/UX)
 We adopted a **Professional Corporate Theme** to ensure readability and executive appeal.
 *   **Color Palette:** Deep Navy (`#002050`) for headers, Bright Blue (`#0078D4`) for data, and Light Grey (`#F3F2F1`) for the canvas background.
